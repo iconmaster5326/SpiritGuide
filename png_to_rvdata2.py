@@ -1,5 +1,3 @@
-# Run this in the root directory of a RPG Maker project.
-
 import os
 
 POSTFIX = ".png"

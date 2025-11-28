@@ -12,6 +12,12 @@ python3 rvdata2_to_png.py [pathtogame]
 python3 assemble_maps.py  [pathtogame]
 ```
 
+To convert all convertible database files to JSON, for manual viewing:
+
+```bash
+ruby rvdata2_to_json.rb [pathtogame]/Data
+```
+
 ## Credits
 
 * [FHNBHJ](https://store.steampowered.com/app/1074190/Dragon_Spirits/) for Dragon Spirits data and assets

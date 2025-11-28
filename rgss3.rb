@@ -1,14 +1,6 @@
-# encoding: utf-8
-# rgss3.rb
-# author: dice2000
-# original author: aoitaku
-# https://gist.github.com/aoitaku/7822424
-# 
-# 本プログラムはRPGツクールVX Ace正規ユーザーが
-# RPGツクールVX Aceでの利用を目的とする場合においてのみ
-# 使用できます。
-#
+# coding: utf-8
 require 'jsonable'
+
 class Color
   include Jsonable
   attr_accessor :red, :green, :blue, :alpha
@@ -22,6 +14,7 @@ class Color
     Color.new(obj.unpack("EEEE"))
   end
 end
+
 class Table
   include Jsonable
   def initialize(data)
@@ -54,6 +47,7 @@ class Table
     Table.new(obj.unpack("VVVVVv*"))
   end
 end
+
 class Tone
   include Jsonable
   attr_accessor :red, :green, :blue, :gray
@@ -144,6 +138,7 @@ class RPG::Map
   attr_accessor :data
   attr_accessor :events
 end
+
 class RPG::Map::Encounter
   include Jsonable
   def initialize
@@ -155,6 +150,7 @@ class RPG::Map::Encounter
   attr_accessor :weight
   attr_accessor :region_set
 end
+
 class RPG::MapInfo
   include Jsonable
   def unpack_names
@@ -175,6 +171,7 @@ class RPG::MapInfo
   attr_accessor :scroll_x
   attr_accessor :scroll_y
 end
+
 class RPG::Event
   include Jsonable
   def unpack_names
@@ -194,6 +191,7 @@ class RPG::Event
   attr_accessor :y
   attr_accessor :pages
 end
+
 class RPG::Event::Page
   include Jsonable
   def unpack_names
@@ -229,6 +227,7 @@ class RPG::Event::Page
   attr_accessor :trigger
   attr_accessor :list
 end
+
 class RPG::Event::Page::Condition
   include Jsonable
   def initialize
@@ -260,6 +259,7 @@ class RPG::Event::Page::Condition
   attr_accessor :item_id
   attr_accessor :actor_id
 end
+
 class RPG::Event::Page::Graphic
   include Jsonable
   def unpack_names
@@ -278,6 +278,7 @@ class RPG::Event::Page::Graphic
   attr_accessor :direction
   attr_accessor :pattern
 end
+
 class RPG::EventCommand
   include Jsonable
   def unpack_names
@@ -301,6 +302,7 @@ class RPG::EventCommand
   attr_accessor :indent
   attr_accessor :parameters
 end
+
 class RPG::MoveRoute
   include Jsonable
   def initialize
@@ -314,6 +316,7 @@ class RPG::MoveRoute
   attr_accessor :wait
   attr_accessor :list
 end
+
 class RPG::MoveCommand
   include Jsonable
   def initialize(code = 0, parameters = [])
@@ -323,6 +326,7 @@ class RPG::MoveCommand
   attr_accessor :code
   attr_accessor :parameters
 end
+
 class RPG::BaseItem
   include Jsonable
   def unpack_names
@@ -345,6 +349,7 @@ class RPG::BaseItem
   attr_accessor :features
   attr_accessor :note
 end
+
 class RPG::Actor < RPG::BaseItem
   include Jsonable
   def unpack_names
@@ -408,6 +413,7 @@ class RPG::Actor < RPG::BaseItem
   attr_accessor :face_index
   attr_accessor :equips
 end
+
 class RPG::Class < RPG::BaseItem
   include Jsonable
   def initialize
@@ -436,6 +442,7 @@ class RPG::Class < RPG::BaseItem
   attr_accessor :params
   attr_accessor :learnings
 end
+
 class RPG::Class::Learning
   include Jsonable
   def unpack_names
@@ -450,6 +457,7 @@ class RPG::Class::Learning
   attr_accessor :skill_id
   attr_accessor :note
 end
+
 class RPG::UsableItem < RPG::BaseItem
   include Jsonable
   def initialize
@@ -476,6 +484,7 @@ class RPG::UsableItem < RPG::BaseItem
   attr_accessor :damage
   attr_accessor :effects
 end
+
 class RPG::Skill < RPG::UsableItem
   include Jsonable
   def unpack_names
@@ -501,6 +510,7 @@ class RPG::Skill < RPG::UsableItem
   attr_accessor :required_wtype_id1
   attr_accessor :required_wtype_id2
 end
+
 class RPG::Item < RPG::UsableItem
   include Jsonable
   def initialize
@@ -514,6 +524,7 @@ class RPG::Item < RPG::UsableItem
   attr_accessor :price
   attr_accessor :consumable
 end
+
 class RPG::EquipItem < RPG::BaseItem
   include Jsonable
   def initialize
@@ -526,6 +537,7 @@ class RPG::EquipItem < RPG::BaseItem
   attr_accessor :etype_id
   attr_accessor :params
 end
+
 class RPG::Weapon < RPG::EquipItem
   include Jsonable
   def initialize
@@ -538,6 +550,7 @@ class RPG::Weapon < RPG::EquipItem
   attr_accessor :wtype_id
   attr_accessor :animation_id
 end
+
 class RPG::Armor < RPG::EquipItem
   include Jsonable
   def initialize
@@ -548,6 +561,7 @@ class RPG::Armor < RPG::EquipItem
   end
   attr_accessor :atype_id
 end
+
 class RPG::Enemy < RPG::BaseItem
   include Jsonable
   def unpack_names
@@ -574,6 +588,7 @@ class RPG::Enemy < RPG::BaseItem
   attr_accessor :drop_items
   attr_accessor :actions
 end
+
 class RPG::State < RPG::BaseItem
   include Jsonable
   def unpack_names
@@ -628,6 +643,7 @@ class RPG::BaseItem::Feature
   attr_accessor :data_id
   attr_accessor :value
 end
+
 class RPG::UsableItem::Damage
   include Jsonable
   def unpack_names
@@ -646,6 +662,7 @@ class RPG::UsableItem::Damage
   attr_accessor :variance
   attr_accessor :critical
 end
+
 class RPG::UsableItem::Effect
   include Jsonable
   def initialize(code = 0, data_id = 0, value1 = 0, value2 = 0)
@@ -659,6 +676,7 @@ class RPG::UsableItem::Effect
   attr_accessor :value1
   attr_accessor :value2
 end
+
 class RPG::Enemy::DropItem
   include Jsonable
   def initialize
@@ -670,6 +688,7 @@ class RPG::Enemy::DropItem
   attr_accessor :data_id
   attr_accessor :denominator
 end
+
 class RPG::Enemy::Action
   include Jsonable
   def initialize
@@ -685,6 +704,7 @@ class RPG::Enemy::Action
   attr_accessor :condition_param2
   attr_accessor :rating
 end
+
 class RPG::Troop
   include Jsonable
   def unpack_names
@@ -701,6 +721,7 @@ class RPG::Troop
   attr_accessor :members
   attr_accessor :pages
 end
+
 class RPG::Troop::Member
   include Jsonable
   def initialize
@@ -714,6 +735,7 @@ class RPG::Troop::Member
   attr_accessor :y
   attr_accessor :hidden
 end
+
 class RPG::Troop::Page
   include Jsonable
   def unpack_names
@@ -728,6 +750,7 @@ class RPG::Troop::Page
   attr_accessor :span
   attr_accessor :list
 end
+
 class RPG::Troop::Page::Condition
   include Jsonable
   def initialize
@@ -757,6 +780,7 @@ class RPG::Troop::Page::Condition
   attr_accessor :actor_hp
   attr_accessor :switch_id
 end
+
 class RPG::Animation
   include Jsonable
   def unpack_names
@@ -787,6 +811,7 @@ class RPG::Animation
   attr_accessor :frames
   attr_accessor :timings
 end
+
 class RPG::Animation::Frame
   include Jsonable
   def initialize
@@ -812,6 +837,7 @@ class RPG::Animation::Timing
   attr_accessor :flash_color
   attr_accessor :flash_duration
 end
+
 class RPG::Tileset
   include Jsonable
   def unpack_names
@@ -840,6 +866,7 @@ class RPG::Tileset
   attr_accessor :flags
   attr_accessor :note
 end
+
 class RPG::CommonEvent
   include Jsonable
   def unpack_names
@@ -865,6 +892,7 @@ class RPG::CommonEvent
   attr_accessor :switch_id
   attr_accessor :list
 end
+
 class RPG::System
   include Jsonable
   def unpack_names
@@ -1008,6 +1036,7 @@ class RPG::System
   attr_accessor :edit_map_id
   attr_accessor :magic_number
 end
+
 class RPG::System::Vehicle
   include Jsonable
   def unpack_names
@@ -1029,6 +1058,7 @@ class RPG::System::Vehicle
   attr_accessor :start_x
   attr_accessor :start_y
 end
+
 class RPG::System::Terms
   include Jsonable
   def unpack_names
@@ -1048,6 +1078,7 @@ class RPG::System::Terms
   attr_accessor :etypes
   attr_accessor :commands
 end
+
 class RPG::System::TestBattler
   include Jsonable
   def initialize
@@ -1059,6 +1090,7 @@ class RPG::System::TestBattler
   attr_accessor :level
   attr_accessor :equips
 end
+
 class RPG::AudioFile
   include Jsonable
   def unpack_names
@@ -1073,6 +1105,7 @@ class RPG::AudioFile
   attr_accessor :volume
   attr_accessor :pitch
 end
+
 class RPG::BGM < RPG::AudioFile
   @@last = RPG::BGM.new
   def play(pos = 0)
@@ -1101,6 +1134,7 @@ class RPG::BGM < RPG::AudioFile
   end
   attr_accessor :pos
 end
+
 class RPG::BGS < RPG::AudioFile
   @@last = RPG::BGS.new
   def play(pos = 0)
@@ -1129,6 +1163,7 @@ class RPG::BGS < RPG::AudioFile
   end
   attr_accessor :pos
 end
+
 class RPG::ME < RPG::AudioFile
   def play
     if @name.empty?
@@ -1144,6 +1179,7 @@ class RPG::ME < RPG::AudioFile
     Audio.me_fade(time)
   end
 end
+
 class RPG::SE < RPG::AudioFile
   def play
     unless @name.empty?
@@ -1153,4 +1189,117 @@ class RPG::SE < RPG::AudioFile
   def self.stop
     Audio.se_stop
   end
+end
+
+# Takes file contents loaded with `Marshal.load` or whatnot, and produces JSON,
+# on which `to_json` can be called to turn it into a string.
+def rvdata2_to_json(rvdata2)
+  if rvdata2.is_a?(Array)
+    rvdata2.each{ |d|
+      d.unpack_names if d != nil
+    }
+  elsif rvdata2.is_a?(Hash)
+    if rvdata2.size != 0
+      rvdata2.each_value{|v|
+        v.unpack_names
+      }
+    end
+  else
+    rvdata2.unpack_names
+  end
+
+  return rvdata2
+end
+
+def restore_rvdata2(list)
+  if list.class == Integer || list.class == TrueClass || list.class == FalseClass 
+    return list
+  end
+  return unless list.has_key?("json_class")
+  obj = nil
+  case list["json_class"]
+    when "Color"
+      obj = Color.new([0,0,0,0])
+    when "Table"
+      obj = Table.new([1,1,0,0,1,[]])
+    when "Tone"
+      obj = Tone.new([0,0,0,0])
+    when "RPG::Event"
+      obj = RPG::Event.new(list["@x"], list["@y"])
+    when "RPG::EventCommand"
+      obj = RPG::EventCommand.new(list["@code"], list["@indent"], list["@parameters"])
+    when "RPG::MoveCommand"
+      obj = RPG::MoveCommand.new(list["@code"], list["@parameters"])
+    when "RPG::BaseItem::Feature"
+      obj = RPG::BaseItem::Feature.new(list["@code"], list["@data_id"], list["@value"])
+    when "RPG::UsableItem::Effect"
+      obj = RPG::UsableItem::Effect.new(list["@code"], list["@data_id"], list["@value1"], list["@value2"])
+    when "RPG::Map"
+      obj = RPG::Map.new(list["@width"], list["@height"])
+    when "RPG::BGM"
+      obj = RPG::BGM.new(list["@name"], list["@volume"], list["@pitch"])
+    when "RPG::BGS"
+      obj = RPG::BGS.new(list["@name"], list["@volume"], list["@pitch"])
+    when "RPG::ME"
+      obj = RPG::ME.new(list["@name"], list["@volume"], list["@pitch"])
+    when "RPG::SE"
+      obj = RPG::SE.new(list["@name"], list["@volume"], list["@pitch"])
+    else
+      str = "obj=" + list["json_class"] + ".new"
+      eval(str)
+  end
+  iterate_setting_value(obj, list)
+  return obj
+end
+
+def iterate_setting_value(target, list)
+  val = target.instance_variables
+  val.each{|d|
+    if d == :@events
+      list[d.to_s].each{|k, v|
+        target.events[k.to_i] = restore_rvdata2(v)
+      }
+    elsif list[d.to_s].is_a?(Hash)
+      target.instance_variable_set(d, restore_rvdata2(list[d.to_s]))
+    # some of array may be in this format [Integer, Obj1, Obj2] (ex. EventCommand->MoveRoute)
+    elsif list[d.to_s].is_a?(Array) && (list[d.to_s][0].is_a?(Hash) || list[d.to_s][1].is_a?(Hash))
+      data_trans = []
+      list[d.to_s].each{|d|
+          data_trans << restore_rvdata2(d)
+      }
+      target.instance_variable_set(d, data_trans)
+    else
+      target.instance_variable_set(d, list[d.to_s])
+    end
+  }
+end
+
+# Takes file contents loaded with `JSON.parse` or whatnot, and produces
+# an object you can call `Marshal.dump` on to save as a rvdata2 file.
+# Does not manipulate files at `filepath`; just needs the file name for some tweaks.
+def json_to_rvdata2(json, filepath)
+  data_trans = nil
+  if json.is_a?(Array)
+    data_trans = []
+    json.each{ |d|
+      if d == nil
+        data_trans << d
+      else
+        data_trans << restore_rvdata2(d)
+      end
+    }
+  elsif json.is_a?(Hash)
+    if File.basename(filepath, '.*') == 'MapInfos'
+      data_trans = {}
+      json.each{|k, v|
+        data_trans[k.to_i] = restore_rvdata2(v)
+      }
+    else
+      data_trans = restore_rvdata2(json)
+    end
+  else
+    data_trans = restore_rvdata2(json)
+  end
+
+  return data_trans
 end
