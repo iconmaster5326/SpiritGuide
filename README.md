@@ -14,9 +14,7 @@ rake install
 To set up the game to be viewable in RPG Maker VX Ace:
 
 ```bash
-echo "RPGVXAce 1.02" > [pathtogame]/Game.rvproj2
-python3 rvdata2_to_png.py [pathtogame]
-python3 assemble_maps.py  [pathtogame]
+ruby setup_project.rb [pathtogame]
 ```
 
 To convert all convertible database files to JSON, for manual viewing:
