@@ -1,0 +1,124 @@
+<div class="col container">
+    <div class="row container text-center align-content-center" style="height: 25vh">
+        <div class="row justify-content-center">
+            <h1 class="col fw-bold text-decoration-underline" style="font-size: 350%">Spirit Guide</h1>
+        </div>
+        <div class="row justify-content-center">
+            <h5 class="col">Online database for the video game <a href="https://store.steampowered.com/app/1074190/Dragon_Spirits/">Dragon Spirits</a></h5>
+        </div>
+    </div>
+    <div class="row container">
+        <div class="row">
+            <div class="col">
+                <div class="accordion" id="dragons">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dragonsContent" aria-expanded="true" aria-controls="dragonsContent">
+                                <h5>Dragons (<%= dragons.length %>)</h5>
+                            </button>
+                        </h2>
+                        <div id="dragonsContent" class="accordion-collapse collapse" data-bs-parent="#dragons">
+                            <div class="accordion-body">
+                                <ul>
+                                    <% for dragon in dragons do %>
+                                    <li>
+                                        <a href="dragon/<%= dragon.id %>.html#<%= dragon.name_en %>"><%= dragon.name_en %></a>
+                                    </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="accordion" id="skills">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skillsContent" aria-expanded="true" aria-controls="skillsContent">
+                                <h5>Skills (<%= skills.length %>)</h5>
+                            </button>
+                        </h2>
+                        <div id="skillsContent" class="accordion-collapse collapse" data-bs-parent="#skills">
+                            <div class="accordion-body">
+                                <ul>
+                                    <% for skill in skills do %>
+                                    <li>
+                                        <a href="skill/<%= skill.id %>.html#<%= skill.name_en %>"><%= skill.name_en %></a>
+                                    </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="accordion" id="accs">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accsContent" aria-expanded="true" aria-controls="accsContent">
+                                <h5>Held Items (<%= accessories.length %>)</h5>
+                            </button>
+                        </h2>
+                        <div id="accsContent" class="accordion-collapse collapse" data-bs-parent="#accs">
+                            <div class="accordion-body">
+                                <ul>
+                                    <% for acc in accessories do %>
+                                    <li>
+                                        <a href="accessory/<%= acc.id %>.html#<%= acc.name_en %>"><%= acc.name_en %></a>
+                                    </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="accordion" id="ses">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sesContent" aria-expanded="true" aria-controls="sesContent">
+                                <h5>Status Effects (<%= effects.length %>)</h5>
+                            </button>
+                        </h2>
+                        <div id="sesContent" class="accordion-collapse collapse" data-bs-parent="#ses">
+                            <div class="accordion-body">
+                                <ul>
+                                    <% for se in effects do %>
+                                    <li>
+                                        <a href="effect/<%= se.id %>.html#<%= se.name_en %>"><%= se.name_en %></a>
+                                    </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="accordion" id="talents">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#talentsContent" aria-expanded="true" aria-controls="talentsContent">
+                                <h5>Passive Abilities (<%= talents.length %>)</h5>
+                            </button>
+                        </h2>
+                        <div id="talentsContent" class="accordion-collapse collapse" data-bs-parent="#talents">
+                            <div class="accordion-body">
+                                <ul>
+                                    <% for talent in talents do %>
+                                    <li>
+                                        <a href="talent/<%= talent.id %>.html#<%= talent.name_en %>"><%= talent.name_en %></a>
+                                    </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
