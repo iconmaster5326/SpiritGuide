@@ -4,6 +4,13 @@ An online database for the RPG Dragon Spirits.
 
 ## Instructions
 
+To set up the Ruby environment:
+
+```bash
+bundle install
+rake install
+```
+
 To set up the game to be viewable in RPG Maker VX Ace:
 
 ```bash

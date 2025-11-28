@@ -1,0 +1,3 @@
+module SpiritGuide
+  VERSION: String
+end

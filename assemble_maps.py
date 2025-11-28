@@ -9,11 +9,12 @@ import sys
 
 MAP_INFO_FILENAME = "Data/MapInfos.json"
 
-mapfile = os.path.join(sys.argv[1] if len(sys.argv) >= 2 else os.curdir, "Data/MapInfos.json")
+mapdir = os.path.join(sys.argv[1] if len(sys.argv) >= 2 else os.curdir, "Data")
+mapfile = os.path.join(mapdir, "MapInfos.json")
 mapinfojson = {}
 index = 1
 
-for path, dirnames, filenames in os.walk("Data"):
+for path, dirnames, filenames in os.walk(mapdir):
     for filename in filenames:
         match = re.match(r"(Map\d+)\.rvdata2", filename)
         if match:
