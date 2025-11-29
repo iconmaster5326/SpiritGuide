@@ -4,7 +4,7 @@ An online database for the RPG [Dragon Spirits](https://store.steampowered.com/a
 
 ## Instructions
 
-You'll need a purchased and installed copy of Dragon Spirits. Please give the developer money for their cool game!
+You'll need a [Ruby](https://www.ruby-lang.org/en/) installation, but more importantly, a purchased and installed copy of Dragon Spirits. Please give the developer money for their cool game!
 
 ### Installation
 
