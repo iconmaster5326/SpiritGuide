@@ -1,0 +1,6 @@
+<% thing = args[1].find { |thing| thing.id == args[0] } %>
+<% if thing.nil? %>
+    <span>N/A</span>
+<% else %>
+    <a href="../effect/<%= thing.id %>.html#<%= thing.name_en %>"><%= thing.name_en %></a>
+<% end %>

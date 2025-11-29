@@ -293,6 +293,15 @@ class RPG::BaseItem
     @note = ""
   end
   attr_accessor :id, :name, :icon_index, :description, :features, :note
+
+  # Extension specifically for Dragon Spirits.
+  def mk_effect(*args)
+    args
+  end
+
+  # Extensions specifically for Dragon Spirits.
+  attr_accessor :name_en, :description_en, :cat, :rarity, :party_effect, :attr_gain, :iv_change, :ev_change,
+                :materials, :cost1, :special_material, :collection_attr_gain
 end
 
 class RPG::Actor < RPG::BaseItem

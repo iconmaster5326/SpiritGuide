@@ -3,6 +3,7 @@ require_relative "spirit_guide/rgss3"
 require_relative "spirit_guide/graphics"
 require_relative "spirit_guide/rvdatax"
 require_relative "spirit_guide/scripts"
+require_relative "spirit_guide/icons"
 
 require "erb"
 require "fileutils"
@@ -11,7 +12,13 @@ require "csv"
 # General Dragon Spirits utilities.
 module SpiritGuide
   # The six stats.
-  STATS = %w[HP ATK MAT DEF MDF SPD].freeze
+  STATS = %i[hp atk mat def mdf spd].freeze
+
+  # The types a dragon/skill can be.
+  DRAGON_TYPES = %i[fire wind water lightning earth dark light void].freeze
+
+  # The categories a skill can be.
+  SKILL_CATEGORIES = %i[other physical magical support].freeze
 
   # Get the skill learning table.
   def learnings_table(scripts)
@@ -43,6 +50,12 @@ if __FILE__ == $PROGRAM_NAME
     skills = SpiritGuide::RVDataX.parse_skills(file)
   end
 
+  items = SpiritGuide::RGSS3.rvdata2_to_json(Marshal.load(File.read("#{ARGV[0]}/Data/Items.rvdata2",
+                                                                    binmode: true))).compact
+  items.each do |item|
+    item.instance_eval(item.note)
+  end
+
   accessories = []
   File.open("#{ARGV[0]}/GameData/HoldItems.rvdatax", "rb") do |file|
     accessories = SpiritGuide::RVDataX.parse_accessories(file)
@@ -57,6 +70,8 @@ if __FILE__ == $PROGRAM_NAME
   File.open("#{ARGV[0]}/GameData/Talents.rvdatax", "rb") do |file|
     talents = SpiritGuide::RVDataX.parse_talents(file)
   end
+
+  icons = SpiritGuide::Icons.get_icons(ARGV[0])
 
   # utils for rendering
   def render(page, *args)
@@ -79,7 +94,7 @@ if __FILE__ == $PROGRAM_NAME
     Kernel.binding
   end
 
-  def dragon_scope(dragon, skills, talents, skill_pool)
+  def dragon_scope(dragon, dragons, skills, accessories, effects, talents, items, skill_pool)
     Kernel.binding
   end
 
@@ -114,6 +129,28 @@ if __FILE__ == $PROGRAM_NAME
     main_template.result(main_scope(title, contents))
   end
 
+  def more_or_less(sym)
+    case sym
+    when :<=
+      "or less"
+    when :>=
+      "or more"
+    else
+      "(error: #{sym})"
+    end
+  end
+
+  def greater_or_lesser(sym)
+    case sym
+    when :<=
+      "less than (or equal to)"
+    when :>=
+      "greater than (or equal to)"
+    else
+      "(error: #{sym})"
+    end
+  end
+
   # export HTML of data
   dragon_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/dragon.rhtml"))
   scripts = SpiritGuide::Scripts.rvdata2_to_scripts(Marshal.load(File.read("#{ARGV[0]}/Data/Scripts.rvdata2",
@@ -127,13 +164,15 @@ if __FILE__ == $PROGRAM_NAME
     copy_image("#{ARGV[0]}/Graphics/System/DragonCards/c_#{dragon.id}.rvdata2", "pages/assets/card/#{dragon.id}.png")
     File.write("pages/dragon/#{dragon.id}.html",
                render_page(dragon.name_en,
-                           dragon_template.result(dragon_scope(dragon, skills, talents,
+                           dragon_template.result(dragon_scope(dragon, dragons, skills, accessories, effects, talents, items,
                                                                SpiritGuide.skill_pool(dragon, learnings)))))
   end
 
   skill_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/skill.rhtml"))
   FileUtils.mkdir_p("pages/skill")
+  FileUtils.mkdir_p("pages/assets/skill")
   skills.each do |skill|
+    SpiritGuide::Icons.get_icon(icons, skill.icon).write("pages/assets/skill/#{skill.icon}.png")
     File.write("pages/skill/#{skill.id}.html",
                render_page(skill.name_en, skill_template.result(skill_scope(skill))))
   end
@@ -162,4 +201,18 @@ if __FILE__ == $PROGRAM_NAME
   # export HTML of static pages
   File.write("pages/index.html",
              render_page("", ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/index.rhtml")).result))
+
+  # export other assets
+  first_dragon_type_icon_id = 18 * 16 + 0
+  FileUtils.mkdir_p("pages/assets/type")
+  SpiritGuide::DRAGON_TYPES.each_with_index do |sym, i|
+    SpiritGuide::Icons.get_icon(icons, first_dragon_type_icon_id + i).write("pages/assets/type/#{sym}.png")
+  end
+
+  first_category_icon_id = 22 * 16 + 10
+  FileUtils.mkdir_p("pages/assets/skillcat")
+  SpiritGuide::Icons.get_icon(icons, 0).write("pages/assets/skillcat/other.png")
+  SpiritGuide::SKILL_CATEGORIES[1..].each_with_index do |sym, i|
+    SpiritGuide::Icons.get_icon(icons, first_category_icon_id + i).write("pages/assets/skillcat/#{sym}.png")
+  end
 end

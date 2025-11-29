@@ -11,23 +11,134 @@
                     <%= dragon.desc_en %>
                 </div>
             </div>
+            <div class="row">
+                <div class="col"><strong>Internal ID:</strong> <%= dragon.id %></div>
+            </div>
         </div>
         <div class="col">
-            <img class="float-end" src="../assets/dragon/<%= dragon.id %>.png" alt="<%= dragon.name_en %>">
+            <img class="float-end" height="400vh" src="../assets/dragon/<%= dragon.id %>.png" alt="<%= dragon.name_en %>">
         </div>
     </div>
-    <div class="row"><div class="col"><strong>Rating:</strong> <%= dragon.rarity %></div></div>
-    <div class="row"><div class="col"><strong>Type:</strong> <%= dragon.type %></div></div>
-    <div class="row"><div class="col"><strong>Stats:</strong> Base: <%= dragon.base_params %> Gains: <%= dragon.ev_gain %></div></div>
-    <div class="row"><div class="col"><strong>Found at:</strong> <%= dragon.area_en %></div></div>
-    <div class="row"><div class="col"><strong>Testament:</strong> <%= dragon.capture_pool %></div></div>
-    <div class="row"><div class="col"><strong>Testament chance:</strong> <%= dragon.capture_chance %>%</div></div>
-    <% flat_talents = flatten_talents(dragon.base_talents) %>
-    <div class="row"><div class="col"><strong>Talents:</strong> <%= render("talent_link", flat_talents[0], talents) %> and <%= flat_talents[1..].map { |tid| render("talent_link", tid, talents) }.join(" / ") %></div></div>
-    <div class="row"><div class="col"><strong>Skills:</strong>
-        <% for id in skill_pool do %>
-            <% skill = skills.find { |skill| skill.id == id } %>
-            <a href="../skill/<%= skill.id %>.html#<%= skill.name_en %>"><%= skill.name_en %></a>
-        <% end %>
-    </div></div>
+    <div class="row">
+        <div class="col-5 container">
+            <div class="row"><div class="col"><strong>Rating:</strong> <span title="<%= dragon.rarity %>">
+                <% for i in 1..dragon.rarity do %>
+                    <i class="bi bi-star-fill" style="color: gold;"></i>
+                <% end %>
+                <% for i in dragon.rarity..3 do %>
+                    <i class="bi bi-star" style="color: grey;"></i>
+                <% end %>
+            </span></div></div>
+            <div class="row"><div class="col"><strong>Type:</strong> <img src="../assets/type/<%= dragon.type %>.png"> <%= dragon.type.to_s.capitalize %></div></div>
+            <div class="row"><div class="col"><strong>Base stats:</strong></div></div>
+            <% for stat_index in 0...(dragon.base_params.length) do %>
+                <div class="row"><div class="col-1"></div><div class="col-11"><strong><%= SpiritGuide::STATS[stat_index].to_s.upcase %>:</strong> <%= dragon.base_params[stat_index] %></div></div>
+            <% end %>
+            <div class="row"><div class="col"><strong><abbr title="When you win a battle, the XP all your living dragons earn is based off of the 'XP on Defeat' of the first enemy in the enemy party.">XP on Defeat:</abbr></strong>
+                <%= dragon.ev_gain.keys.map { |stat_id| "#{dragon.ev_gain[stat_id]} #{SpiritGuide::STATS[stat_id].to_s.upcase} XP" }.join(", ") %>
+            </div></div>
+            
+            <div class="row"><div class="col">&nbsp;</div></div>
+            
+            <div class="row"><div class="col"><strong>Found at:</strong> <%= dragon.area_en %></div></div>
+            <div class="row"><div class="col"><strong>Contract conditions:</strong>
+                <% case dragon.capture_pool[0]; when 0 %> N/A
+                    <% when 1 %>  Simply defeat your opponent
+                    <% when 2 %>  Defeat your opponent after using <%= dragon.capture_pool[2] %> <%= more_or_less(dragon.capture_pool[1]) %> actions
+                    <% when 3 %>  Defeat your opponent when your current Spirit HP is <%= greater_or_lesser(dragon.capture_pool[1]) %> <%= (dragon.capture_pool[2] * 100).to_i %>%
+                    <% when 5 %>  Defeat your opponent when your current Spirit has <%= dragon.capture_pool[1] %> or more levels of enchanted stats
+                    <% when 6 %>  Defeat your opponent when your current Spirit has <%= dragon.capture_pool[1] %> or more levels of weakened stats
+                    <% when 7 %>  Defeat your opponent when your final direct damage is <%= greater_or_lesser(dragon.capture_pool[1]) %> <%= dragon.capture_pool[2] %>
+                    <% when 9 %>  Defeat your opponent while the opponent hasn't received any direct damage
+                    <% when 10 %> Defeat your opponent when the opponent has <%= render("effect_link", dragon.capture_pool[1], effects) %>
+                    <% when 11 %> Defeat your opponent when the your Dragon Spirit has <%= render("effect_link", dragon.capture_pool[1], effects) %>
+                    <% when 12 %> Finish your opponent with a <%= dragon.capture_pool[1].to_s.capitalize %> <%= SpiritGuide::SKILL_CATEGORIES[dragon.capture_pool[2]-1] %> skill
+                    <% when 13 %> Finish your opponent while your SP is <%= greater_or_lesser(dragon.capture_pool[1]) %> <%= dragon.capture_pool[2] %>
+                    <% when 15 %> Defeat your opponent with a <%= SpiritGuide::SKILL_CATEGORIES[dragon.capture_pool[3]-1] %> skill that costs <%= greater_or_lesser(dragon.capture_pool[1]) %> <%= dragon.capture_pool[2] %> SP
+                    <% when 17 %> Only use <%= SpiritGuide::SKILL_CATEGORIES[dragon.capture_pool[1]-1] %> skills to defeat your opponent
+                    <% when 18 %> Defeat your opponent without swapping your Dragon Spirit
+                    <% when 19 %> Defeat your opponent after using <%= dragon.capture_pool[1] %> different skills
+                    <% when 20 %> Defeat your opponent while <%= dragon.capture_pool[2] ? "your" : "your opponent's" %> team has <%= render("effect_link", dragon.capture_pool[1], effects) %>
+                    <% when 21 %> Defeat your opponent without any Dragon Spirit defeated after <%= dragon.capture_pool[1] %> actions
+                    <% when 22 %> Defeat your opponent when the opponent has more than <%= dragon.capture_pool[1] %> levels of enchanted stats
+                    <% when 23 %> Defeat your opponent when the opponent has more than <%= dragon.capture_pool[1] %> levels of weakened stats
+                    <% when 24 %> Defeat your opponent without any HP heal
+                    <% when 25 %> Defeat your opponent while having more than <%= dragon.capture_pool[1] %> Crystal Shards
+                    <% when 26 %> <% thing = dragons.find {|thing| thing.id == dragon.capture_pool[1] } %> Defeat your opponent with <a href="../effect/<%= thing.id %>.html#<%= thing.name_en %>"><%= thing.name_en %></a>
+                    <% when 27 %> Defeat your opponent while both sides are having <%= render("effect_link", dragon.capture_pool[1], effects) %> states
+                    <% when 28 %> <% thing = items.find {|thing| thing.id == dragon.capture_pool[1] } %> Defeat your opponent while having <%= thing.name_en %>
+                    <% when 29 %> Defeat your opponent when your last strike is at a CP greater than (or equal to) <%= (dragon.capture_pool[1] * 100).to_i %>%
+                    <% when 30 %> Defeat your opponent while your current Dragon Spirit HP is between <%= dragon.capture_pool[1] %> to <%= dragon.capture_pool[2] %>
+                    <% when 31 %> Defeat your opponent while your team Spirits' elements are <%= dragon.capture_pool[1].to_s.capitalize %>
+                    <% when 32 %> Only admit to the favored humans
+                    <% when 33 %> Defeat your opponent while <%= dragon.capture_pool[3] ? "your" : "your opponent's" %> team has both <%= render("effect_link", dragon.capture_pool[1], effects) %> and <%= render("effect_link", dragon.capture_pool[2], effects) %>
+                    <% when 34 %> Defeat your opponent with skill <%= dragon.capture_pool[1]+1 %> in your skill sets
+                    <% when 35 %> Deal a fatal blow
+                    <% when 36 %> Fall into the trap
+                    <% when 37 %> Climb up the tree, match, and win
+                    <% when 38 %> Defeat your opponent while having more than 10 support skills
+                    <% when 39 %> Showing your high efficient method on dealing with Academic Affairs Office's business, and win
+                    <% when 40 %> Figure out the truth behind the dripping green liquid in the Restroom, and win
+                    <% when 41 %> Master your way on the stove, and win
+                    <% when 42 %> Stand up to the Restroom bully, and win
+                    <% when 43 %> Discover the plant under the well at Dragon Spirit Academy, and win
+                    <% when 44 %> Catch Dracloud at the Hide and Seek, and win
+                    <% when 45 %> Read the correct Dragon Spirits' Character, and win
+                    <% when 46 %> Become the champion of Double Dragon City coconut opening contest, and win
+                    <% when 47 %> Read the lord's diary that hidden in the city wall, and win
+                    <% when 48 %> Examine two paintings in the highlord's bedroom, and win
+                    <% when 49 %> Speak French
+                    <% when 50 %> Record the lord's past, and win
+                    <% when 51 %> Defeat your opponent with physical skill, and your final direct damage must be more than 1000
+                    <% when 52 %> Use 16 different skills, then defeat your opponent
+                    <% when 53 %> Defeat your opponent after its Rampage, and none of your Dragon Spirit was defeated
+                    <% when 54 %> Help Fibra settle up her life after waking up, and win
+                    <% when 55 %> Defeat your opponent after using a certain number of actions (or less)
+                    <% when 56 %> Defeat your opponent when the opponent has shield
+                    <% else %> Unknown condition type (id: <%= dragon.capture_pool[0] %>, args: <%= dragon.capture_pool[1..] %>)
+                <% end %>
+            </div></div>
+            <div class="row"><div class="col"><strong>Contract availibility chance:</strong> <%= dragon.capture_chance %>%</div></div>
+
+            <div class="row"><div class="col">&nbsp;</div></div>
+
+            <% flat_talents = flatten_talents(dragon.base_talents) %>
+            <div class="row"><div class="col"><strong>Level 15 Talent:</strong></div></div>
+            <div class="row"><div class="col-1"></div><div class="col-11"><%= render("talent_link", flat_talents[0], talents) %></div></div>
+            <div class="row"><div class="col"><strong><abbr title="Both enemy and contracted dragons come into existence with a random second talent, among the following options. For your dragons, you can swap between these talents with certain items.">Level 20 Talent(s):</abbr></strong></div></div>
+            <% for tid in flat_talents[1..] do %>
+                <div class="row"><div class="col-1"></div><div class="col-11"><%= render("talent_link", tid, talents) %></div></div>
+            <% end %>
+        </div>
+        <div class="col-7 container">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Skill</th>
+                        <th scope="col">SP</th>
+                        <th scope="col">Power</th>
+                        <th scope="col">Effects</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <% for id in skill_pool do %>
+                        <% skill = skills.find { |skill| skill.id == id } %>
+                        <tr>
+                            <th scope="row">
+                                <% skillcat = skill.category >= 4 ? 0 : skill.category %>
+                                <span style="position: relative; top: 0px; left: 0px;" title="<%= skill.type == :none ? 'Non-Elemental' : skill.type.to_s.capitalize %> <%= SpiritGuide::SKILL_CATEGORIES[skillcat] %>">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/<%= skill.icon %>.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/<%= SpiritGuide::SKILL_CATEGORIES[skillcat] %>.png">
+                                </span>
+                                <a href="../skill/<%= skill.id %>.html#<%= skill.name_en %>"><%= skill.name_en %></a>
+                            </th>
+                            <td><%= skill.sp_cost %></td>
+                            <td><%= skill.power %></td>
+                            <td><%= skill.desc_en %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

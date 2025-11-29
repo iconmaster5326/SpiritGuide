@@ -6,7 +6,7 @@ module SpiritGuide
     # A dragon definition.
     class Dragon
       attr_accessor :id, :name, :name_en, :desc, :desc_en, :area, :area_en, :type, :base_talents, :base_params, :rarity,
-                    :ev_gain, :base_skills, :learn_skills, :learn_talents, :traits, :capture_pool, :capture_chance
+                    :ev_gain, :base_skills, :learn_skills, :learn_talents, :traits, :capture_pool, :capture_chance, :offset
 
       def scope
         Kernel.binding
@@ -34,7 +34,7 @@ module SpiritGuide
 
     # A dragon active skill definition.
     class Skill
-      attr_accessor :id, :name, :name_en, :desc, :desc_en, :icon, :type, :category, :channel, :power, :sp_cost
+      attr_accessor :id, :name, :name_en, :desc, :desc_en, :icon, :type, :category, :channel, :power, :sp_cost, :traits
 
       def scope
         Kernel.binding
