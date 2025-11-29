@@ -229,6 +229,8 @@ if __FILE__ == $PROGRAM_NAME
   # export HTML of static pages
   File.write("pages/index.html",
              render_page("", ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/index.rhtml")).result))
+  File.write("pages/about.html",
+             render_page("", ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/about.rhtml")).result))
 
   # export other assets
   first_dragon_type_icon_id = 18 * 16 + 0
