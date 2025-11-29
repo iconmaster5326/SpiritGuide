@@ -10,14 +10,9 @@
     <div class="row">
         <div class="col"><strong>Internal ID:</strong> <%= accessory.id %></div>
     </div>
-    <div class="row"><div class="col"><strong>Rating:</strong> <span title="<%= accessory.rarity %>">
-        <% for i in 1..accessory.rarity do %>
-            <i class="bi bi-star-fill" style="color: gold;"></i>
-        <% end %>
-        <% for i in accessory.rarity..3 do %>
-            <i class="bi bi-star" style="color: grey;"></i>
-        <% end %>
-    </span></div></div>
+    <div class="row">
+        <div class="col"><strong>Rating:</strong> <%= render("rating", accessory.rarity) %></div>
+    </div>
     <div class="row">
         <div class="col"><strong>Price:</strong> <%= accessory.price %> CS</div>
     </div>

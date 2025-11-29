@@ -1,0 +1,9 @@
+<% rating = args[0] %>
+<span title="<%= rating %>">
+    <% for i in 1..rating do %>
+        <i class="bi bi-star-fill" style="color: gold;"></i>
+    <% end %>
+    <% for i in rating..3 do %>
+        <i class="bi bi-star" style="color: grey;"></i>
+    <% end %>
+</span>

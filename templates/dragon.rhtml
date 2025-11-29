@@ -21,14 +21,7 @@
     </div>
     <div class="row">
         <div class="col-5 container">
-            <div class="row"><div class="col"><strong>Rating:</strong> <span title="<%= dragon.rarity %>">
-                <% for i in 1..dragon.rarity do %>
-                    <i class="bi bi-star-fill" style="color: gold;"></i>
-                <% end %>
-                <% for i in dragon.rarity..3 do %>
-                    <i class="bi bi-star" style="color: grey;"></i>
-                <% end %>
-            </span></div></div>
+            <div class="row"><div class="col"><strong>Rating:</strong> <%= render("rating", dragon.rarity) %></div></div>
             <div class="row"><div class="col"><strong>Type:</strong> <img src="../assets/type/<%= dragon.type %>.png"> <%= dragon.type.to_s.capitalize %></div></div>
             <div class="row"><div class="col"><strong>Base stats:</strong></div></div>
             <% for stat_index in 0...(dragon.base_params.length) do %>

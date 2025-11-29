@@ -15,7 +15,7 @@ module SpiritGuide
   STATS = %i[hp atk mat def mdf spd].freeze
 
   # The types a dragon/skill can be.
-  DRAGON_TYPES = %i[fire wind water lightning earth dark light void].freeze
+  DRAGON_TYPES = %i[fire wind water thunder earth dark light void].freeze
 
   # The categories a skill can be.
   SKILL_CATEGORIES = %i[other physical magical support].freeze
