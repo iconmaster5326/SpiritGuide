@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+        <title>
+            
+                Cosmet - Spirit Guide
+            
+        </title>
+        <style>
+            .fs-xxs {
+                font-size: xx-small;
+            }
+
+            .fs-xs {
+                font-size: x-small;
+            }
+
+            .fs-s {
+                font-size: small;
+            }
+
+            .fs-m {
+                font-size: medium;
+            }
+
+            .fs-l {
+                font-size: large;
+            }
+
+            .fs-xl {
+                font-size: x-large;
+            }
+
+            .fs-xxl {
+                font-size: xx-large;
+            }
+
+            @media (min-width: 576px) {
+                /* sm */
+                .fs-xxs-sm {
+                font-size: xx-small;
+                }
+
+                .fs-xs-sm {
+                font-size: x-small;
+                }
+
+                .fs-s-sm {
+                font-size: small;
+                }
+
+                .fs-m-sm {
+                font-size: medium;
+                }
+
+                .fs-l-sm {
+                font-size: large;
+                }
+
+                .fs-xl-sm {
+                font-size: x-large;
+                }
+
+                .fs-xxl-sm {
+                font-size: xx-large;
+                }
+            }
+
+            @media (min-width: 768px) {
+                /* md */
+                .fs-xxs-md {
+                font-size: xx-small;
+                }
+
+                .fs-xs-md {
+                font-size: x-small;
+                }
+
+                .fs-s-md {
+                font-size: small;
+                }
+
+                .fs-m-md {
+                font-size: medium;
+                }
+
+                .fs-l-md {
+                font-size: large;
+                }
+
+                .fs-xl-md {
+                font-size: x-large;
+                }
+
+                .fs-xxl-md {
+                font-size: xx-large;
+                }
+            }
+
+            @media (min-width: 992px) {
+                /* lg */
+                .fs-xxs-lg {
+                font-size: xx-small;
+                }
+
+                .fs-xs-lg {
+                font-size: x-small;
+                }
+
+                .fs-s-lg {
+                font-size: small;
+                }
+
+                .fs-m-lg {
+                font-size: medium;
+                }
+
+                .fs-l-lg {
+                font-size: large;
+                }
+
+                .fs-xl-lg {
+                font-size: x-large;
+                }
+
+                .fs-xxl-lg {
+                font-size: xx-large;
+                }
+            }
+
+            @media (min-width: 1200px) {
+                /* xl */
+                .fs-xxs-xl {
+                font-size: xx-small;
+                }
+
+                .fs-xs-xl {
+                font-size: x-small;
+                }
+
+                .fs-s-xl {
+                font-size: small;
+                }
+
+                .fs-m-xl {
+                font-size: medium;
+                }
+
+                .fs-l-xl {
+                font-size: large;
+                }
+
+                .fs-xl-xl {
+                font-size: x-large;
+                }
+
+                .fs-xxl-xl {
+                font-size: xx-large;
+                }
+            }
+
+            @media (min-width: 1400px) {
+                /* xxl */
+                .fs-xxs-xxl {
+                font-size: xx-small;
+                }
+
+                .fs-xs-xxl {
+                font-size: x-small;
+                }
+
+                .fs-s-xxl {
+                font-size: small;
+                }
+
+                .fs-m-xxl {
+                font-size: medium;
+                }
+
+                .fs-l-xxl {
+                font-size: large;
+                }
+
+                .fs-xl-xxl {
+                font-size: x-large;
+                }
+
+                .fs-xxl-xxl {
+                font-size: xx-large;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <div class="container">
+            <nav class="row navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/index.html">Spirit Guide</a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about.html">About</a>
+                            </li>
+                        </ul>
+                        <form action="/search.html" class="d-flex" role="search">
+                            <input
+                                id="query"
+                                name="query"
+                                class="form-control me-2"
+                                type="search"
+                                placeholder="Search..."
+                                aria-label="Search"
+                                value=""
+                            />
+                            <button class="btn btn-outline-primary" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col container">
+    <div class="row justify-content-between">
+        <div class="col container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="fw-bold text-decoration-underline display-3">Cosmet</h1>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col">
+                    The Dragon Spirit is open-minded and magnanimous, but it unexpectedly gets along with Starbarrie, and when their Spirit Fields merge, it will even show a bright starry sky. So if you want a portable starry sky, you can bring both Dragon Spirits with you.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"><strong>Internal ID:</strong> 78</div>
+            </div>
+        </div>
+        <div class="col">
+            <img class="float-end" height="400vh" src="../assets/dragon/78.png" alt="Cosmet">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5 container">
+            <div class="row"><div class="col"><strong>Rating:</strong> 
+<span title="1">
+    
+        <i class="bi bi-star-fill" style="color: gold;"></i>
+    
+    
+        <i class="bi bi-star" style="color: grey;"></i>
+    
+        <i class="bi bi-star" style="color: grey;"></i>
+    
+        <i class="bi bi-star" style="color: grey;"></i>
+    
+</span>
+</div></div>
+            <div class="row"><div class="col"><strong>Type:</strong> <img src="../assets/type/light.png"> Light</div></div>
+            <div class="row"><div class="col"><strong>Base stats:</strong></div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11"><strong>HP:</strong> 100</div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11"><strong>ATK:</strong> 135</div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11"><strong>MAT:</strong> 80</div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11"><strong>DEF:</strong> 105</div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11"><strong>MDF:</strong> 100</div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11"><strong>SPD:</strong> 120</div></div>
+            
+            <div class="row"><div class="col"><strong><abbr title="When you win a battle, the XP all your living dragons earn is based off of the 'XP on Defeat' of the first enemy in the enemy party.">XP on Defeat:</abbr></strong>
+                13 ATK XP, 12 SPD XP
+            </div></div>
+            
+            <div class="row"><div class="col">&nbsp;</div></div>
+            
+            <div class="row"><div class="col"><strong>Found at:</strong> Wisdom Tower</div></div>
+            <div class="row"><div class="col"><strong>Contract conditions:</strong>
+                 Defeat your opponent while having more than 2500 Crystal Shards
+                    
+            </div></div>
+            <div class="row"><div class="col"><strong>Contract availibility chance:</strong> 50%</div></div>
+
+            <div class="row"><div class="col">&nbsp;</div></div>
+
+            
+            <div class="row"><div class="col"><strong>Level 15 Talent:</strong></div></div>
+            <div class="row"><div class="col-1"></div><div class="col-11">
+
+    <span><a href="../talent/16.html#Retribution">Retribution</a> - Increase light skills power when having stats enchant</span>
+
+</div></div>
+            <div class="row"><div class="col"><strong><abbr title="Both enemy and contracted dragons come into existence with a random second talent, among the following options. For your dragons, you can swap between these talents with certain items.">Level 20 Talent(s):</abbr></strong></div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11">
+
+    <span><a href="../talent/33.html#Justice">Justice</a> - Copy the opponent's enchant effect</span>
+
+</div></div>
+            
+                <div class="row"><div class="col-1"></div><div class="col-11">
+
+    <span><a href="../talent/38.html#Blink">Blink</a> - Gain 50% initial CP when entering the battle</span>
+
+</div></div>
+            
+        </div>
+        <div class="col-7 container">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Skill</th>
+                        <th scope="col">SP</th>
+                        <th scope="col">Power</th>
+                        <th scope="col">Effects</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light support">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/support.png">
+                                </span>
+                                <a href="../skill/377.html#Shuttling Stars">Shuttling Stars</a>
+                            </th>
+                            <td>40</td>
+                            <td>0</td>
+                            <td>Enchant all stats by 2 levels, weaken all opponent stats by 2 levels</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Wind physical">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/6.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/physical.png">
+                                </span>
+                                <a href="../skill/309.html#Firmament Sword">Firmament Sword</a>
+                            </th>
+                            <td>30</td>
+                            <td>100</td>
+                            <td>Enchant ATK&AGI by 1 level before the attack</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light magical">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/magical.png">
+                                </span>
+                                <a href="../skill/357.html#Starfire">Starfire</a>
+                            </th>
+                            <td>25</td>
+                            <td>15</td>
+                            <td>Deal indirect damage equal to 40% of opponent current HP</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light support">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/support.png">
+                                </span>
+                                <a href="../skill/391.html#Forbear">Forbear</a>
+                            </th>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>When equipped, enchant your ATK by 2 levels whenever you receive damage, passive skill</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light support">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/support.png">
+                                </span>
+                                <a href="../skill/365.html#Nova Guardian">Nova Guardian</a>
+                            </th>
+                            <td>15</td>
+                            <td>0</td>
+                            <td>Gain 30SP, both sides gain Guard: Reduce skill damage that is more than 200 skill power</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light physical">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/physical.png">
+                                </span>
+                                <a href="../skill/361.html#Iris Wheel">Iris Wheel</a>
+                            </th>
+                            <td>35</td>
+                            <td>330</td>
+                            <td>Enchant opponent's all stats by 1 level before the attack</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light physical">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/physical.png">
+                                </span>
+                                <a href="../skill/394.html#Iridescent Sword">Iridescent Sword</a>
+                            </th>
+                            <td>30</td>
+                            <td>190</td>
+                            <td>Clear your opponent's single target buffs before the attack</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light physical">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/physical.png">
+                                </span>
+                                <a href="../skill/360.html#Interfere">Interfere</a>
+                            </th>
+                            <td>50</td>
+                            <td>230</td>
+                            <td>Inflict Confuse: Reverse CP increase</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Light physical">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/7.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/physical.png">
+                                </span>
+                                <a href="../skill/362.html#Glass Maneuver">Glass Maneuver</a>
+                            </th>
+                            <td>30</td>
+                            <td>150</td>
+                            <td>Increase skill power when opponent has stat enchant, steal the enchant after your attack</td>
+                        </tr>
+                    
+                        
+                        <tr>
+                            <th scope="row">
+                                
+                                <span style="position: relative; top: 0px; left: 0px;" title="Earth support">
+                                    <img style="position: relative; top: 0px; left: 0px;" src="../assets/skill/5.png">
+                                    <img style="position: absolute; top: 0px; left: 0px;" src="../assets/skillcat/support.png">
+                                </span>
+                                <a href="../skill/256.html#Ancient Energy">Ancient Energy</a>
+                            </th>
+                            <td>20</td>
+                            <td>0</td>
+                            <td>Gain 100SP and a long-duration of Seal: Cannot use skills that are less than 120 skill power</td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+            </div>
+            <div class="row" style="height: 10vh"></div>
+        </div>
+        <footer class="fixed-bottom bg-body-tertiary container fs-xxs fs-xs-md fs-s-lg">
+            <div class="row">
+                <div class="col">Made using <a href="https://github.com/iconmaster5326/SpiritGuide">SpiritGuide</a>, version 0.1.0.</div>
+                <div class="col text-end">Page last updated on 2025-11-29 16:08:22 -0500.</div>
+            </div>
+            <div class="row">
+                <div class="col">All graphics used are property of <a href="https://store.steampowered.com/app/1074190/Dragon_Spirits/">FHNBHJ</a>. Content here is provided for informational puproses only.</div>
+                <div class="col text-end">My favourite dragon is Dualtail. What's yours?</div>
+            </div>
+        </footer>
+    </body>
+</html>
