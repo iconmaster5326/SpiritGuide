@@ -1,6 +1,6 @@
 # SpiritGuide
 
-An online database for the RPG [Dragon Spirits](https://store.steampowered.com/app/1074190/Dragon_Spirits/).
+An online database for the RPG [Dragon Spirits](https://store.steampowered.com/app/1074190/Dragon_Spirits/). This repository also contains, for a lack of a better location, tools for modding Dragon Spirits.
 
 ## Instructions
 
@@ -27,9 +27,11 @@ To set up the game to be viewable in the editor, and to be able to mod it:
 ruby setup_project.rb [pathtogame]
 ```
 
-From there, open up the newly created `Game.rvproj2` file in RPG Maker VX Ace.
+From there, open up the newly created `Game.rvproj2` file in RPG Maker VX Ace. Once you're all done, and ready to test out your modded copy of Dragon Spirits, call:
 
-TODO: how to save changed image assets?
+```bash
+ruby build_project.rb [pathtogame]
+```
 
 ### For generating a Static Site
 
