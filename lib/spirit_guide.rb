@@ -117,7 +117,7 @@ if __FILE__ == $PROGRAM_NAME
     Kernel.binding
   end
 
-  def talent_scope(talent)
+  def talent_scope(talent, dragons)
     Kernel.binding
   end
 
@@ -199,7 +199,7 @@ if __FILE__ == $PROGRAM_NAME
   FileUtils.mkdir_p("pages/talent")
   talents.each do |talent|
     File.write("pages/talent/#{talent.id}.html",
-               render_page(talent.name_en, talent_template.result(talent_scope(talent))))
+               render_page(talent.name_en, talent_template.result(talent_scope(talent, dragons))))
   end
 
   # export HTML of static pages
