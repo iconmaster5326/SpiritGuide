@@ -1,1 +1,19 @@
-<h1><%= effect.name_en %></h1>
+<div class="col container">
+    <div class="row">
+        <div class="col">
+            <img width="72px" height="72px" style="display: inline-block; image-rendering: pixelated;" src="../assets/effect/<%= effect.id %>.png">
+            <h1 style="display: inline-block; vertical-align: middle;" class="fw-bold text-decoration-underline display-3">
+                <%= effect.name_en %>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"><strong>Internal ID:</strong> <%= effect.id %></div>
+    </div>
+    <div class="row">
+        <div class="col"><strong>Category:</strong> <%= effect_category(effect.category) %></div>
+    </div>
+    <div class="row">
+        <div class="col"><strong>Effect:</strong> <%= effect.desc_en %></div>
+    </div>
+</div>

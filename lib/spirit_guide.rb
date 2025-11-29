@@ -20,6 +20,9 @@ module SpiritGuide
   # The categories a skill can be.
   SKILL_CATEGORIES = %i[other physical magical support].freeze
 
+  # The categories a status effect can be.
+  EFFECT_CATEGORIES = %i[negative positive negative_team positive_team 4 5 other].freeze
+
   # Get the skill learning table.
   def learnings_table(scripts)
     skill_csv = scripts.find { |script| script.name == "Skill_CSV" }
@@ -94,6 +97,23 @@ if __FILE__ == $PROGRAM_NAME
       result << tids[1][1] unless tids[1][1].zero?
     end
     result
+  end
+
+  def effect_category(cat)
+    case cat
+    when 0
+      "Negative (Single-Target)"
+    when 1
+      "Positive (Single-Target)"
+    when 2
+      "Negative (Field)"
+    when 3
+      "Positive (Field)"
+    when 6
+      "Other"
+    else
+      cat.to_s
+    end
   end
 
   # define scopes for page executions
@@ -190,7 +210,9 @@ if __FILE__ == $PROGRAM_NAME
 
   se_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/effect.rhtml"))
   FileUtils.mkdir_p("pages/effect")
+  FileUtils.mkdir_p("pages/assets/effect")
   effects.each do |se|
+    SpiritGuide::Icons.get_icon(icons, se.icon).write("pages/assets/effect/#{se.id}.png")
     File.write("pages/effect/#{se.id}.html",
                render_page(se.name_en, se_template.result(se_scope(se))))
   end

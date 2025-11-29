@@ -46,7 +46,7 @@ module SpiritGuide
       rvdatax = Rvdatax.from_file(stream)
       index = 1
       rvdatax.entries.map do |entry|
-        if entry.contents == ""
+        if entry.contents.strip.empty?
           index += 1
           next
         end
@@ -57,6 +57,11 @@ module SpiritGuide
 
         scope = result.scope
         Kernel.eval(entry.contents, scope)
+
+        if result.name_en.nil? || result.name_en.strip.empty?
+          index += 1
+          next
+        end
 
         index += 1
         result
@@ -80,7 +85,7 @@ module SpiritGuide
       rvdatax = Rvdatax.from_file(stream)
       index = 1
       rvdatax.entries.map do |entry|
-        if entry.contents == ""
+        if entry.contents.strip.empty?
           index += 1
           next
         end
@@ -91,6 +96,11 @@ module SpiritGuide
 
         scope = result.scope
         Kernel.eval(entry.contents, scope)
+
+        if result.name_en.nil? || result.name_en.strip.empty?
+          index += 1
+          next
+        end
 
         index += 1
         result
@@ -113,7 +123,7 @@ module SpiritGuide
       rvdatax = Rvdatax.from_file(stream)
       index = 1
       rvdatax.entries.map do |entry|
-        if entry.contents == ""
+        if entry.contents.strip.empty?
           index += 1
           next
         end
@@ -124,6 +134,11 @@ module SpiritGuide
 
         scope = result.scope
         Kernel.eval(entry.contents, scope)
+
+        if result.name_en.nil? || result.name_en.strip.empty?
+          index += 1
+          next
+        end
 
         index += 1
         result
@@ -146,7 +161,7 @@ module SpiritGuide
       rvdatax = Rvdatax.from_file(stream)
       index = 1
       rvdatax.entries.map do |entry|
-        if entry.contents == ""
+        if entry.contents.strip.empty?
           index += 1
           next
         end
@@ -157,6 +172,11 @@ module SpiritGuide
 
         scope = result.scope
         Kernel.eval(entry.contents, scope)
+
+        if result.name_en.nil? || result.name_en.strip.empty?
+          index += 1
+          next
+        end
 
         index += 1
         result
