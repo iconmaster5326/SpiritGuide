@@ -73,6 +73,13 @@ if __FILE__ == $PROGRAM_NAME
 
   icons = SpiritGuide::Icons.get_icons(ARGV[0])
 
+  scripts = SpiritGuide::Scripts.rvdata2_to_scripts(Marshal.load(File.read("#{ARGV[0]}/Data/Scripts.rvdata2",
+                                                                           binmode: true)))
+  learnings = SpiritGuide.learnings_table(scripts)
+  skill_pools = dragons.to_h do |dragon, _|
+    [dragon.id, SpiritGuide.skill_pool(dragon, learnings)]
+  end
+
   # utils for rendering
   def render(page, *args)
     ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/#{page}.rhtml")).result(Kernel.binding)
@@ -98,7 +105,7 @@ if __FILE__ == $PROGRAM_NAME
     Kernel.binding
   end
 
-  def skill_scope(skill)
+  def skill_scope(skill, dragons, skill_pools)
     Kernel.binding
   end
 
@@ -153,9 +160,6 @@ if __FILE__ == $PROGRAM_NAME
 
   # export HTML of data
   dragon_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/dragon.rhtml"))
-  scripts = SpiritGuide::Scripts.rvdata2_to_scripts(Marshal.load(File.read("#{ARGV[0]}/Data/Scripts.rvdata2",
-                                                                           binmode: true)))
-  learnings = SpiritGuide.learnings_table(scripts)
   FileUtils.mkdir_p("pages/dragon")
   FileUtils.mkdir_p("pages/assets/dragon")
   FileUtils.mkdir_p("pages/assets/card")
@@ -165,7 +169,7 @@ if __FILE__ == $PROGRAM_NAME
     File.write("pages/dragon/#{dragon.id}.html",
                render_page(dragon.name_en,
                            dragon_template.result(dragon_scope(dragon, dragons, skills, accessories, effects, talents, items,
-                                                               SpiritGuide.skill_pool(dragon, learnings)))))
+                                                               skill_pools[dragon.id]))))
   end
 
   skill_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/skill.rhtml"))
@@ -174,7 +178,7 @@ if __FILE__ == $PROGRAM_NAME
   skills.each do |skill|
     SpiritGuide::Icons.get_icon(icons, skill.icon).write("pages/assets/skill/#{skill.icon}.png")
     File.write("pages/skill/#{skill.id}.html",
-               render_page(skill.name_en, skill_template.result(skill_scope(skill))))
+               render_page(skill.name_en, skill_template.result(skill_scope(skill, dragons, skill_pools))))
   end
 
   acc_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/accessory.rhtml"))
@@ -208,6 +212,7 @@ if __FILE__ == $PROGRAM_NAME
   SpiritGuide::DRAGON_TYPES.each_with_index do |sym, i|
     SpiritGuide::Icons.get_icon(icons, first_dragon_type_icon_id + i).write("pages/assets/type/#{sym}.png")
   end
+  copy_image("pages/assets/type/void.png", "pages/assets/type/none.png")
 
   first_category_icon_id = 22 * 16 + 10
   FileUtils.mkdir_p("pages/assets/skillcat")
