@@ -2,9 +2,34 @@ require_relative "spirit_guide/version"
 require_relative "spirit_guide/rgss3"
 require_relative "spirit_guide/graphics"
 require_relative "spirit_guide/rvdatax"
+require_relative "spirit_guide/scripts"
 
 require "erb"
 require "fileutils"
+require "csv"
+
+# General Dragon Spirits utilities.
+module SpiritGuide
+  # The six stats.
+  STATS = %w[HP ATK MAT DEF MDF SPD].freeze
+
+  # Get the skill learning table.
+  def learnings_table(scripts)
+    skill_csv = scripts.find { |script| script.name == "Skill_CSV" }
+    eval(skill_csv.contents)
+    CSV.parse(SKILL_LEARNINGS)
+  end
+
+  module_function :learnings_table
+
+  # Get the skill pool a dragon can learn.
+  def skill_pool(dragon, table)
+    found = table.find { |row| row[0].to_i == dragon.id }
+    eval(found[2]).values
+  end
+
+  module_function :skill_pool
+end
 
 if __FILE__ == $PROGRAM_NAME
   # gather data
@@ -35,7 +60,18 @@ if __FILE__ == $PROGRAM_NAME
 
   # utils for rendering
   def render(page, *args)
-    ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/#{page}.rhtml")).result
+    ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/#{page}.rhtml")).result(Kernel.binding)
+  end
+
+  def flatten_talents(tids)
+    result = [tids[0]]
+    if tids[1].instance_of?(Integer)
+      result << tids[1]
+    else
+      result << tids[1][0] unless tids[1][0].zero?
+      result << tids[1][1] unless tids[1][1].zero?
+    end
+    result
   end
 
   # define scopes for page executions
@@ -43,7 +79,7 @@ if __FILE__ == $PROGRAM_NAME
     Kernel.binding
   end
 
-  def dragon_scope(dragon)
+  def dragon_scope(dragon, skills, talents, skill_pool)
     Kernel.binding
   end
 
@@ -80,12 +116,19 @@ if __FILE__ == $PROGRAM_NAME
 
   # export HTML of data
   dragon_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/dragon.rhtml"))
+  scripts = SpiritGuide::Scripts.rvdata2_to_scripts(Marshal.load(File.read("#{ARGV[0]}/Data/Scripts.rvdata2",
+                                                                           binmode: true)))
+  learnings = SpiritGuide.learnings_table(scripts)
   FileUtils.mkdir_p("pages/dragon")
+  FileUtils.mkdir_p("pages/assets/dragon")
+  FileUtils.mkdir_p("pages/assets/card")
   dragons.each do |dragon|
-    copy_image("#{ARGV[0]}/Graphics/Battlers/d_#{dragon.id}.rvdata2", "pages/dragon/sprite#{dragon.id}.png")
-    copy_image("#{ARGV[0]}/Graphics/System/DragonCards/c_#{dragon.id}.rvdata2", "pages/dragon/card#{dragon.id}.png")
+    copy_image("#{ARGV[0]}/Graphics/Battlers/d_#{dragon.id}.rvdata2", "pages/assets/dragon/#{dragon.id}.png")
+    copy_image("#{ARGV[0]}/Graphics/System/DragonCards/c_#{dragon.id}.rvdata2", "pages/assets/card/#{dragon.id}.png")
     File.write("pages/dragon/#{dragon.id}.html",
-               render_page(dragon.name_en, dragon_template.result(dragon_scope(dragon))))
+               render_page(dragon.name_en,
+                           dragon_template.result(dragon_scope(dragon, skills, talents,
+                                                               SpiritGuide.skill_pool(dragon, learnings)))))
   end
 
   skill_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/skill.rhtml"))

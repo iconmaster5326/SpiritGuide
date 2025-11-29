@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "jsonable", "> 0"
   spec.add_dependency "kaitai-struct", ">= 0.11"
+  spec.add_dependency "zlib", "> 0"
 end

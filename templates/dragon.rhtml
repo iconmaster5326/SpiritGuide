@@ -1,1 +1,33 @@
-<h1><%= dragon.name_en %></h1>
+<div class="col container">
+    <div class="row justify-content-between">
+        <div class="col container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="fw-bold text-decoration-underline display-3"><%= dragon.name_en %></h1>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="col">
+                    <%= dragon.desc_en %>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <img class="float-end" src="../assets/dragon/<%= dragon.id %>.png" alt="<%= dragon.name_en %>">
+        </div>
+    </div>
+    <div class="row"><div class="col"><strong>Rating:</strong> <%= dragon.rarity %></div></div>
+    <div class="row"><div class="col"><strong>Type:</strong> <%= dragon.type %></div></div>
+    <div class="row"><div class="col"><strong>Stats:</strong> Base: <%= dragon.base_params %> Gains: <%= dragon.ev_gain %></div></div>
+    <div class="row"><div class="col"><strong>Found at:</strong> <%= dragon.area_en %></div></div>
+    <div class="row"><div class="col"><strong>Testament:</strong> <%= dragon.capture_pool %></div></div>
+    <div class="row"><div class="col"><strong>Testament chance:</strong> <%= dragon.capture_chance %>%</div></div>
+    <% flat_talents = flatten_talents(dragon.base_talents) %>
+    <div class="row"><div class="col"><strong>Talents:</strong> <%= render("talent_link", flat_talents[0], talents) %> and <%= flat_talents[1..].map { |tid| render("talent_link", tid, talents) }.join(" / ") %></div></div>
+    <div class="row"><div class="col"><strong>Skills:</strong>
+        <% for id in skill_pool do %>
+            <% skill = skills.find { |skill| skill.id == id } %>
+            <a href="../skill/<%= skill.id %>.html#<%= skill.name_en %>"><%= skill.name_en %></a>
+        <% end %>
+    </div></div>
+</div>
