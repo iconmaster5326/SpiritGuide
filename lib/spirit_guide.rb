@@ -203,7 +203,9 @@ if __FILE__ == $PROGRAM_NAME
 
   acc_template = ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/accessory.rhtml"))
   FileUtils.mkdir_p("pages/accessory")
+  FileUtils.mkdir_p("pages/assets/accessory")
   accessories.each do |acc|
+    SpiritGuide::Icons.get_icon(icons, acc.icon).write("pages/assets/accessory/#{acc.id}.png")
     File.write("pages/accessory/#{acc.id}.html",
                render_page(acc.name_en, acc_template.result(acc_scope(acc))))
   end

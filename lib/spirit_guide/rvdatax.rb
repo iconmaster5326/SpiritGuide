@@ -73,7 +73,7 @@ module SpiritGuide
     # A dragon equipped item definition.
     class Accessory
       attr_accessor :id, :name, :name_en, :desc, :desc_en, :icon, :category, :rarity, :price, :sell_price,
-                    :trigger_script, :effect_script, :traits
+                    :trigger_script, :effect_script, :traits, :attr_mod, :attr_gain, :party_effect
 
       def scope
         Kernel.binding
