@@ -116,6 +116,10 @@ if __FILE__ == $PROGRAM_NAME
     end
   end
 
+  def js_string_escape(str)
+    str.to_s.gsub(/\\/, "\\\\").gsub(/"/, "\\\"")
+  end
+
   # define scopes for page executions
   def main_scope(title, contents)
     Kernel.binding
@@ -230,7 +234,9 @@ if __FILE__ == $PROGRAM_NAME
   File.write("pages/index.html",
              render_page("", ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/index.rhtml")).result))
   File.write("pages/about.html",
-             render_page("", ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/about.rhtml")).result))
+             render_page("About", ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/about.rhtml")).result))
+  File.write("pages/search.html",
+             render_page("Search", ERB.new(File.read("#{File.dirname(__FILE__)}/../templates/search.rhtml")).result))
 
   # export other assets
   first_dragon_type_icon_id = 18 * 16 + 0

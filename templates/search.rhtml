@@ -1,0 +1,105 @@
+<div class="col container">
+    <div class="row">
+        <div class="col">
+            <h1>Search Results</h1>
+        </div>
+    </div>
+    <div class="row" id="results">
+        <div class="card col-4 col-md-3 col-lg-2" id="result">
+            <a href="">
+                <img src="" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+    <script>
+        const database = [
+            <% for thing in dragons do %>
+            {
+                text: "<%= thing.name_en %> <%= js_string_escape(thing.desc_en) %>",
+                image: "/assets/card/<%= thing.id %>.png",
+                link: "/dragon/<%= thing.id %>.html",
+                name: "<%= thing.name_en %>",
+                type: "Dragon",
+            },
+            <% end %>
+
+            <% for thing in skills do %>
+            {
+                text: "<%= thing.name_en %> <%= js_string_escape(thing.desc_en) %>",
+                image: "/assets/skill/<%= thing.icon %>.png",
+                link: "/skill/<%= thing.id %>.html",
+                name: "<%= thing.name_en %>",
+                type: "Skill",
+            },
+            <% end %>
+
+            <% for thing in accessories do %>
+            {
+                text: "<%= thing.name_en %> <%= js_string_escape(thing.desc_en) %>",
+                image: "/assets/accessory/<%= thing.id %>.png",
+                link: "/accessory/<%= thing.id %>.html",
+                name: "<%= thing.name_en %>",
+                type: "Held Item",
+            },
+            <% end %>
+
+            <% for thing in effects do %>
+            {
+                text: "<%= thing.name_en %> <%= js_string_escape(thing.desc_en) %>",
+                image: "/assets/effect/<%= thing.id %>.png",
+                link: "/effect/<%= thing.id %>.html",
+                name: "<%= thing.name_en %>",
+                type: "State",
+            },
+            <% end %>
+
+            <% for thing in talents do %>
+            {
+                text: "<%= thing.name_en %> <%= js_string_escape(thing.desc_en) %>",
+                image: "/assets/skill/0.png",
+                link: "/talent/<%= thing.id %>.html",
+                name: "<%= thing.name_en %>",
+                type: "Talent",
+            },
+            <% end %>
+        ];
+
+        const results = document.getElementById("results");
+
+        const template = document.getElementById("result");
+        template.remove();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = (urlParams.get("query") || "").trim().toLowerCase();
+
+        const inputBar = document.getElementById("query");
+        inputBar.value = urlParams.get("query") || "";
+
+        for (const data of database) {
+            if (data.text.toLowerCase().includes(query)) {
+                const card = template.cloneNode(true);
+                card.id = undefined;
+
+                const link = card.querySelector("a");
+                link.href = data.link;
+
+                const image = card.querySelector("img");
+                image.src = data.image;
+
+                const title = card.querySelector("h5");
+                title.innerHTML = data.name;
+
+                const footer = card.querySelector(".card-footer");
+                footer.innerHTML = data.type;
+                
+                results.appendChild(card);
+            }
+        }
+    </script>
+</div>
